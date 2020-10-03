@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import SearchBar from 'material-ui-search-bar';
-import Script from 'react-load-script';
+// import SearchBar from 'material-ui-search-bar';
 import StarRatingComponent from 'react-star-rating-component';
 import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
@@ -10,6 +9,7 @@ import { store } from 'react-notifications-component';
 class CreateReview extends Component {
   constructor(props) {
     super(props);
+    this.autocomplete = null;
     this.state = {
       location: '',
       placeId: '',
@@ -20,10 +20,28 @@ class CreateReview extends Component {
     }
   }
 
-  searchPlace = () => {
-    this.autocomplete = new google.maps.places.Autocomplete(
+  componentDidMount = () => {
+    window.initMap = this.initMap;
+    loadJS("https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&callback=initMap");
+  }
+
+// add listener for changes & get user location
+  initMap = () => {
+    this.autocomplete = new window.google.maps.places.Autocomplete(
       document.getElementById('autocomplete'));
     this.autocomplete.addListener('place_changed', this.handlePlaceSelect);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        var geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        var circle = new window.google.maps.Circle(
+          {center: geolocation, radius: position.coords.accuracy});
+      this.autocomplete.setBounds(circle.getBounds());
+      this.autocomplete.setOptions({strictBounds: true})
+    });
+  }
   }
 
   handlePlaceSelect = () => {
@@ -36,11 +54,11 @@ class CreateReview extends Component {
 
   submitReview = (event) => {
     let submit = true;
-    if (this.state.location == '') {
+    if (this.state.location === '') {
       this.createErrorNotif('Submission failed', 'Please choose a location to review.');
       submit = false;
     }
-    if (this.state.cleanliness == 0 || this.state.distancing == 0 || this.state.service == 0) {
+    if (this.state.cleanliness === 0 || this.state.distancing === 0 || this.state.service === 0) {
       this.createErrorNotif('Submission failed', 'Please provide ratings for all categories.');
       submit = false;
     }
@@ -51,8 +69,8 @@ class CreateReview extends Component {
 
   createErrorNotif = (title, message) => {
     store.addNotification({
-      title: {title},
-      message: {message},
+      title: title,
+      message: message,
       type: 'warning',
       container:'top-right',
       animationIn: ["animated", "fadeIn"],
@@ -61,13 +79,25 @@ class CreateReview extends Component {
     });
   }
 
+  updateQuery = (event) => {
+    this.setState({location: event.target.value});
+  }
+
   render() {
     return (
-      <div className="review-form">
-        <Script url="https://maps.googleapis.com/maps/api/jskey=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&libraries=places"          
-          onLoad={this.searchPlace} />        
-        <SearchBar id="autocomplete" placeholder="Location" value={this.state.location} />
-
+      <div className="review-form">  
+      <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places
+        &key=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&callback=initMap">
+      </script>     
+        <input id="autocomplete" placeholder="Location" onChange={this.updateQuery} defaultValue={this.state.location} />
+        <div className="location-type">
+          Type
+          <select name="type">
+            <option value="food">Grocery Store or Restaurant</option>
+            <option value="shop">Store or Shop</option>
+            <option value="public">Public spaces</option>
+          </select>
+        </div>
         <div className="category">
           Cleanliness
           <div className="category-description">
@@ -110,10 +140,20 @@ class CreateReview extends Component {
           </div>
         </div>
 
-        <textarea id="review" name="Location review" rows="4" cols="50" placeholder="Leave a review!"> </textarea>
+        <textarea id="review" name="Location review" rows="4" cols="50" placeholder="Leave a review!"/>
         <button type="button" onClick={this.submitReview}>Submit Review</button>
       </div>
     )
   }
-
 }
+
+// https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
+function loadJS(src) {
+  var ref = window.document.getElementsByTagName("script")[0];
+  var script = window.document.createElement("script");
+  script.src = src;
+  script.async = true;
+  ref.parentNode.insertBefore(script, ref);
+}
+
+export default CreateReview;

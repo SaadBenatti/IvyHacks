@@ -2,6 +2,7 @@ import React from 'react';
 import ReactNotifications from 'react-notifications-component';
 import logo from './logo.svg';
 import './App.css';
+import CreateReview from './components/create-review'
 
 
 function App() {

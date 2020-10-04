@@ -2,7 +2,7 @@
 
 #### :sparkles: :seedling: :hatching_chick: :seedling: :sparkles:
 
-Alough restrictions are being lifted, we know the world will never be the same.
+Although restrictions are being lifted, we know the world will never be the same.
 We hesitently and cautiously approach the public but remain shrouded in uncertainty. 
 With the most recent community constructed feedback, **Canary** (like a canary in a coal mine) 
 is built with the goal for you to make more confident judgements on where

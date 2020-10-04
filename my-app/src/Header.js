@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   customizeToolbar: {
-    minHeight: 125,
+    minHeight: 100,
   },
   canaryLogo: {
     marginRight: theme.spacing(2),
@@ -31,16 +31,16 @@ const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
     color: 'black',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    borderRadius: 25,
+    backgroundColor: fade(theme.palette.common.white, 0.5),
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: fade(theme.palette.common.white, 0.5),
     },
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(1),
-      width: 'auto',
+      // width: '%',
     },
   },
   searchIcon: {
@@ -89,7 +89,9 @@ export default function Header() {
         style={{ backgroundColor: '#F0D8C9' }}>
         <Toolbar className={classes.customizeToolbar}>
             <IconButton className = {classes.canaryLogo} >
+            <Link to="/About">
                 <Logo />
+            </Link>
             </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             {/* About */}
@@ -99,12 +101,15 @@ export default function Header() {
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search location…"
+              placeholder="Location…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              style={{
+                fontFamily: '"Poppins", sans-serif'
+              }}
             />
           </div>
           <div className={classes.review}>

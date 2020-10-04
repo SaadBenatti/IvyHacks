@@ -12,6 +12,8 @@ import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import './App.css';
+import CreateReview from './components/create-review'
+
 
 const useStyles = makeStyles({
   root: {
@@ -100,8 +102,6 @@ function App() {
       </Grid>
       
     </Grid>
-
-
   );
 
 }

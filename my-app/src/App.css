@@ -1,3 +1,7 @@
+.App {
+  text-align: center;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
@@ -33,17 +37,22 @@ option{
 /* Create two unequal columns that sits next to each other */
 /* Sidebar/left column */
 .side {
-  max-width: 40%;
+  max-width: 38%;
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+/* Map Column*/
+#map {   
+  width: 55%;
+  margin: 10px 3%;
+  height: 400px;
   background-color: white;
   padding: 20px;
 }
 
-/* Map Column*/
-.map {   
-  max-width: 60%;
-  background-color: white;
-  padding: 20px;
-}
 
 .lookingfor {
   display: inline-flex;
@@ -56,6 +65,10 @@ option{
   background-color: #FFE177
 }
 
+.tagline {
+  font-size: 1.3em;
+
+}
 
 #type-img {
   display: inline;
@@ -68,8 +81,8 @@ option{
 .review-form {
   display: flex;
   flex-direction: column;
-  margin: 5%;
   padding: 0 5%;
+  margin: 225px 0 100px;
 }
 .review-form input {
   max-width: 40%;
@@ -80,15 +93,24 @@ option{
 .location-type {
   margin: 1%;
   display: flex;
-  justify-content: space-between;
 }
 
-button {
+.location-type select {
+  margin: 2%;
+  padding: 4px;
+}
+
+.review-form button {
   display: inline-block;
   width: 18%;
   font-size: 15px;
   padding: 8px 4px;
   border-radius:8px;
+  background-color: #FFE177
+}
+
+.review-form button:hover {
+  background-color: #f0c93e
 }
 
 .category {

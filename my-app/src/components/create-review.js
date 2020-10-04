@@ -4,7 +4,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
 import { store } from 'react-notifications-component';
-
+import { loadJS, removeGoogleMapScript } from '../maps-functions';
 
 class CreateReview extends Component {
   constructor(props) {
@@ -22,6 +22,8 @@ class CreateReview extends Component {
   }
 
   componentDidMount = () => {
+    // clear old script
+    removeGoogleMapScript();
     window.initMap = this.initMap;
     loadJS("https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&callback=initMap");
   }
@@ -56,29 +58,31 @@ class CreateReview extends Component {
   submitReview = (event) => {
     let submit = true;
     if (this.state.location === '') {
-      this.createErrorNotif('Submission failed', 'Please choose a location to review.');
+      this.createNotif('Submission failed', 'Please choose a location to review.', 'warning');
       submit = false;
     }
     if (this.state.cleanliness === 0 || this.state.distancing === 0 || this.state.service === 0) {
-      this.createErrorNotif('Submission failed', 'Please provide ratings for all categories.');
+      this.createNotif('Submission failed', 'Please provide ratings for all categories.', 'warning');
       submit = false;
     }
     if (submit) {
       // send info to the database
+      this.createNotif("Submission succeeded!", "Your review has been submitted", 'success');
     }
   }
 
-  createErrorNotif = (title, message) => {
+  createNotif = (title, message, type) => {
     store.addNotification({
       title: title,
       message: message,
-      type: 'warning',
+      type: type,
       container:'top-right',
       animationIn: ["animated", "fadeIn"],
       animationOut: ["animated", "fadeOut"], 
       dismiss: { duration: 4000 }
     });
   }
+
 
   updateQuery = (event) => {
     this.setState({location: event.target.value});
@@ -90,19 +94,29 @@ class CreateReview extends Component {
 
   render() {
     return (
-      <div className="review-form">  
+      <div className="review-form" style={{
+        fontFamily: '"Poppins", sans-serif',
+        position: 'absolute',
+        left: '50%', top: '50%',
+        transform: 'translate(-50%, -50%)',
+      }}>  
+      <h3>Where did you go?</h3>  
         <input id="autocomplete" placeholder="Location" onChange={this.updateQuery} defaultValue={this.state.location} />
+        <br></br><br></br>
+
         <div className="location-type">
-          Type
+          Type: <br></br>
           <select name="type" defaultValue={this.state.type} onChange={this.changeType}>
             <option value="grocery">Grocery Store</option>
+            <option value="shop">Shopping</option>
             <option value="restaurant">Restaurant</option>
-            <option value="shop">Store or Shop</option>
             <option value="public">Public spaces</option>
           </select>
         </div>
+        <br></br>
+
         <div className="category">
-          Cleanliness
+          <h3>Cleanliness</h3>
           <div className="category-description">
             How clean was this place? Are there good procedures to clean often touched surfaces?
           </div>
@@ -116,7 +130,7 @@ class CreateReview extends Component {
         </div>
 
         <div className="category">
-          Social Distancing
+        <h3>Social Distancing</h3>
           <div className="category-description">
             Are people following restrictions (wearing masks, social distancing)? Are occupancy limits being respected?
           </div>
@@ -130,7 +144,7 @@ class CreateReview extends Component {
         </div>
 
         <div className="category">
-          Customer Service
+        <h3>Customer Service</h3>
           <div className="category-description">
             Do the staff enforce restrictions? Did they make you feel safe?
           </div>
@@ -142,21 +156,13 @@ class CreateReview extends Component {
               onStarClick={(val, prev, name) => this.setState({service: val})} />
           </div>
         </div>
+        <br></br><br></br>
 
-        <textarea id="review" name="Location review" rows="4" cols="50" placeholder="Leave a review!"/>
+        <textarea id="review" name="Location review" rows="4" cols="50" placeholder="Additional comments here!"/><br></br>
         <button type="button" onClick={this.submitReview}>Submit Review</button>
       </div>
     )
   }
-}
-
-// https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
-function loadJS(src) {
-  var ref = window.document.getElementsByTagName("script")[0];
-  var script = window.document.createElement("script");
-  script.src = src;
-  script.async = true;
-  ref.parentNode.insertBefore(script, ref);
 }
 
 export default CreateReview;

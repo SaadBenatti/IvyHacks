@@ -13,6 +13,7 @@ class CreateReview extends Component {
     this.state = {
       location: '',
       placeId: '',
+      type: '',
       cleanliness: 0,
       distancing: 0,
       service:0,
@@ -38,10 +39,10 @@ class CreateReview extends Component {
         };
         var circle = new window.google.maps.Circle(
           {center: geolocation, radius: position.coords.accuracy});
-      this.autocomplete.setBounds(circle.getBounds());
-      this.autocomplete.setOptions({strictBounds: true})
-    });
-  }
+        this.autocomplete.setBounds(circle.getBounds());
+        this.autocomplete.setOptions({strictBounds: true})
+      });
+    }
   }
 
   handlePlaceSelect = () => {
@@ -83,6 +84,10 @@ class CreateReview extends Component {
     this.setState({location: event.target.value});
   }
 
+  changeType = (event) => {
+    this.setState({type: event.target.value});
+  }
+
   render() {
     return (
       <div className="review-form" style={{
@@ -100,10 +105,10 @@ class CreateReview extends Component {
 
         <div className="location-type">
           Type: <br></br>
-          <select name="type">
-            <option value="grocery">Grocery store</option>
+          <select name="type" defaultValue={this.state.type} onChange={this.changeType}>
+            <option value="grocery">Grocery Store</option>
             <option value="shop">Shopping</option>
-            <option value="food">Restaurant</option>
+            <option value="restaurant">Restaurant</option>
             <option value="public">Public spaces</option>
           </select>
         </div>

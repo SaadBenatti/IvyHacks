@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactNotifications from 'react-notifications-component';
 import { Grid } from "@material-ui/core";
 import Header from './Header';
 import { ReactComponent as Groceries } from './svg/groceries.svg';
@@ -15,7 +16,36 @@ import './App.css';
 import CreateReview from './components/create-review'
 import About from './About'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { fontFamily } from '@material-ui/system';
+import MapView from './components/map-view';
+
+
+
+var firebase = require("firebase/app");
+
+  // Add the Firebase products that you want to use
+  require("firebase/auth");
+  require("firebase/firestore");
+
+  var firebaseConfig = {
+      apiKey: "AIzaSyCBTHB21J-4g4-GD86mShx5Sd8JztJiwuQ",
+      authDomain: "ivyhacks-ebbc6.firebaseapp.com",
+      databaseURL: "https://ivyhacks-ebbc6.firebaseio.com",
+      projectId: "ivyhacks-ebbc6",
+      storageBucket: "ivyhacks-ebbc6.appspot.com",
+      messagingSenderId: "793780521339",
+      appId: "1:793780521339:web:80799d16e5163782b015de",
+      measurementId: "G-PVSJQD49N5"
+  };
+  
+  if (firebase.apps.length === 0) {
+    firebase.initializeApp({});
+  }
+  else {
+
+    // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  }
+
 
 
 const useStyles = makeStyles({
@@ -35,6 +65,11 @@ function App() {
       <div>
         <BrowserRouter>
           <Grid container>
+    
+            // kept from merge conflict but exists in index.html for this pr
+            <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places
+              &key=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&callback=initMap">
+            </script>  
 
             <Grid item xs={12}>
               <Header />
@@ -153,10 +188,6 @@ function App() {
           </Grid>
         </BrowserRouter>
       </div>
-
-
-
-
     </Grid>
   );
 

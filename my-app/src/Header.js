@@ -8,6 +8,8 @@ import { ReactComponent as Logo } from './svg/logo.svg';
 import { ReactComponent as SearchIcon } from './svg/search.svg';
 import { ReactComponent as ReviewBtn } from './svg/addrev.svg';
 import { IconButton } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+// import CreateReview from './components/create-review'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SearchAppBar() {
+export default function Header() {
   const classes = useStyles();
 
   // for conditional background change later
@@ -105,9 +107,13 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <IconButton className={classes.review}>
+          <div className={classes.review}>
+          {/* <Button component={Link} to="/components/create-review"> */}
+          <Link to="/components/create-review">
             <ReviewBtn />
-          </IconButton>
+          </Link>
+          {/* </Button> */}
+          </div>
         </Toolbar>
       </AppBar>
     </div>

@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import './App.css';
 import CreateReview from './components/create-review'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -27,11 +28,14 @@ function App() {
 
   return (
     <Grid container direction="column" >
-      <Grid item>
+      
+        <div>
+        <BrowserRouter>
         <Header />
-      </Grid>
-
-      <Grid item container>
+        <Switch>
+        <Route path="/" exact>
+        <div>
+        <Grid item container>
         <Grid xs={false} s={2} />
         <Grid xs={12} s={8}>
         <div style={{
@@ -43,6 +47,13 @@ function App() {
             Welcome, <br></br>
             where are you headed today?
           </h1><br></br>
+
+          {/* </Route> 
+        <Route path="/components/create-review" exact>
+         <div>
+           <CreateReview />
+         </div>
+        </Route>  */}
 
           {/* GROCERIES */}
           <IconButton>
@@ -57,14 +68,14 @@ function App() {
           </Card>
           </IconButton>
 
-          {/* DEPARTMENT STORE */}
+          {/* DEPARTMENT STOREs */}
           <IconButton>
           <Card className={classes.root} elevation={0}>
           <CardContent>
             <Department /> 
             <br></br>
             <h3>
-              Department Store
+              Department Stores
             </h3>
           </CardContent>
           </Card>
@@ -100,6 +111,19 @@ function App() {
         </Grid>
         <Grid xs={false} s={2} /> 
       </Grid>
+        </div>
+        </Route> 
+        <Route path="/components/create-review" exact>
+         <div>
+           <CreateReview />
+         </div>
+        </Route> 
+        </Switch>
+        </BrowserRouter>
+        </div>
+     
+
+      
       
     </Grid>
   );

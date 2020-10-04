@@ -12,7 +12,7 @@ const About = () => {
     <h1>About <span style={{color: '#FD8087'}}>Canary</span></h1>
     </p>
     <p class="centered">
-        Alough restrictions are being lifted, we know the world will never be the same.
+        Although restrictions are being lifted, we know the world will never be the same.
         We hesitently and cautiously approach the public but remain shrouded in uncertainty. 
         With the most recent community constructed feedback, <b>Canary </b> (like a canary in a coal mine) 
         is built with the goal for you to make more confident judgements on where

@@ -9,7 +9,11 @@ import { ReactComponent as SearchIcon } from './svg/search.svg';
 import { ReactComponent as ReviewBtn } from './svg/addrev.svg';
 import { IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-// import CreateReview from './components/create-review'
+import {
+  geocodeByAddress,
+  geocodeByPlaceId,
+  getLatLng,
+} from 'react-places-autocomplete';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(1),
-      // width: '%',
+      width: '15%',
     },
   },
   searchIcon: {
@@ -79,6 +83,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
+  const [address, setAddress] = React.useState("");
+  const handleSelect = async value => {};
 
   // for conditional background change later
   const currCategoryBackground = 'groceries';
@@ -93,9 +99,11 @@ export default function Header() {
                 <Logo />
             </Link>
             </IconButton>
+            
           <Typography className={classes.title} variant="h6" noWrap>
             {/* About */}
           </Typography>
+
           <div className={classes.search}>
             <div className={classes.searchIcon} >
               <SearchIcon />
@@ -112,6 +120,7 @@ export default function Header() {
               }}
             />
           </div>
+
           <div className={classes.review}>
           {/* <Button component={Link} to="/components/create-review"> */}
           <Link to="/components/create-review">

@@ -12,7 +12,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 // import Typography from '@material-ui/core/Typography';
-import './App.css';
+// import './App.css';
 import CreateReview from './components/create-review'
 import About from './About'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -65,11 +65,10 @@ function App() {
       <div>
         <BrowserRouter>
           <Grid container>
-    
-            // kept from merge conflict but exists in index.html for this pr
-            <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places
+
+            {/* <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places
               &key=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&callback=initMap">
-            </script>  
+            </script>   */}
 
             <Grid item xs={12}>
               <Header />

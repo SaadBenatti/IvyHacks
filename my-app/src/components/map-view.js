@@ -5,6 +5,7 @@ import { ReactComponent as Department } from '../svg/department-stores.svg';
 import { ReactComponent as Restaurants } from '../svg/restaurants.svg';
 import { ReactComponent as Spaces } from '../svg/public-spaces.svg'
 import { loadJS, removeGoogleMapScript } from '../maps-functions';
+import $ from 'jquery';
 
 class MapView extends Component {
   constructor(props) {
@@ -64,6 +65,14 @@ class MapView extends Component {
     this.map.setCenter(latlng);
     // take all the information, query the firebase, save results to state
     // if there are no reviews, return the top results from the google maps API
+    const newType = $("#location :selected").val();
+    const request = {
+      location: latlng,
+      type: [newType],
+      rankBy: window.google.maps.places.RankBy.DISTANCE,
+    }
+    let service = new window.google.maps.places.PlacesService(this.map);
+    service.nearbySearch(request, ((results, status) => this.setState({ results: [results[0], results[1], results[2]] })));
     // OR "looks like there are no reviewed locations for your query"
   }
 
@@ -83,16 +92,20 @@ class MapView extends Component {
     );
   }
 
+  selectPlaceType = (event) => {
+    this.setState({type: event.target.value});
+  }
+
   render = () => {
     return (
       <div className="searchPage">
         <div className="lookingfor"> 
           <div> I am looking for </div> 
-            <select name = "location" id = "location">
-              <option>grocery store</option>
-              <option>department store</option>
-              <option>restaurant</option>
-              <option>public space</option>
+            <select name = "location" id = "location" onClick={this.selectPlaceType}>
+              <option selected value="supermarket">grocery store</option>
+              <option value="store">department store</option>
+              <option value="restaurant">restaurant</option>
+              <option value="park">public space</option>
             </select>
 
             <div>with</div>
@@ -116,7 +129,7 @@ class MapView extends Component {
             </div>
             <div className="search-results">
               {this.state.results.map((result, index) => (
-                this.createResult(result.name, result.rating, index)
+                this.createResult(result.name, 4, index)
               ))}
           </div>
         </div>

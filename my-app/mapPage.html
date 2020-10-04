@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Page Title</title>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 72px;
+
+  color: #000000;
+}
+
+/* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+.navbar {
+  overflow: hidden;
+  background-color: #FFE177;
+  left: 0 px;
+  top: 0;
+}
+
+
+/* Column container */
+.row {  
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  flex: 40%;
+  background-color: white;
+  padding: 20px;
+}
+
+/* Map Column*/
+.map {   
+
+  flex: 60%;
+  background-color: white;
+  padding: 20px;
+}
+
+
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+
+<div class="navbar">
+  <p>This is where the nav bar will be</p>
+</div>
+
+<br>
+<div class="lookingfor"> 
+  <label> I am looking for </label> 
+    <select name = "location" id = "location">
+      <option>grocery store</option>
+      <option>department store</option>
+      <option>restaurant</option>
+      <option>public space</option>
+  </select>
+  <label>with</label>
+  <select name = "attribute" id = "attribute">
+    <option>good cleanliness</option>
+    <option>good social distancing</option>
+    <option>safe staff</option>
+  </select>
+    
+ social distancing near me 
+</div>
+
+
+<div class="row">
+  <div class="side"> 
+    <div id="container" style="white-space:nowrap">
+    <div id="texts" style="display:inline; white-space:nowrap;"> 
+      <h2>
+        Top Results
+      </h2>
+    </div>
+    <div id="image" style="display:inline;">
+        <img src = "https://cdn.glitch.com/641ccc97-199c-4f62-a721-17bb1dd85be3%2Fgroceries.png?v=1601756351607">
+    </div>
+
+    
+
+</div>
+    
+    <hr>
+    
+    <img src = "https://cdn.glitch.com/641ccc97-199c-4f62-a721-17bb1dd85be3%2Fimage%201.png?v=1601757506594" align = "right">
+    <h3>Wegman's</h3>
+    
+    <br>
+    <hr>
+    <img src = "https://cdn.glitch.com/641ccc97-199c-4f62-a721-17bb1dd85be3%2Fimage%201.png?v=1601757506594" align = "right">
+    <h3>Market Basket</h3>
+    <br>
+    <hr>
+    <img src = "https://cdn.glitch.com/641ccc97-199c-4f62-a721-17bb1dd85be3%2Fimage%201.png?v=1601757506594" align = "right">
+    <h3>Shaw's</h3>
+    <br>
+
+    
+  </div>
+  <div class="map">
+    
+    <img src = "https://cdn.glitch.com/641ccc97-199c-4f62-a721-17bb1dd85be3%2Fmap.png?v=1601756256577" alt = "map">
+    
+  </div>
+</div>
+
+
+</body>
+</html>

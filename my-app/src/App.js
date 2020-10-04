@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactNotifications from 'react-notifications-component';
 import { Grid } from "@material-ui/core";
 import Header from './Header';
 import { ReactComponent as Groceries } from './svg/groceries.svg';
@@ -12,7 +13,9 @@ import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import './App.css';
-import CreateReview from './components/create-review'
+// import CreateReview from './components/create-review';
+import MapView from './components/map-view';
+import CreateReview from './components/create-review';
 
 
 
@@ -60,6 +63,10 @@ function App() {
 
   return (
     <Grid container direction="column" >
+      <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places
+        &key=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&callback=initMap">
+      </script>     
+      <ReactNotifications />
       <Grid item>
         <Header />
       </Grid>

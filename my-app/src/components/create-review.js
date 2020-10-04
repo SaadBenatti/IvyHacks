@@ -13,6 +13,7 @@ class CreateReview extends Component {
     this.state = {
       location: '',
       placeId: '',
+      type: '',
       cleanliness: 0,
       distancing: 0,
       service:0,
@@ -38,10 +39,10 @@ class CreateReview extends Component {
         };
         var circle = new window.google.maps.Circle(
           {center: geolocation, radius: position.coords.accuracy});
-      this.autocomplete.setBounds(circle.getBounds());
-      this.autocomplete.setOptions({strictBounds: true})
-    });
-  }
+        this.autocomplete.setBounds(circle.getBounds());
+        this.autocomplete.setOptions({strictBounds: true})
+      });
+    }
   }
 
   handlePlaceSelect = () => {
@@ -83,17 +84,19 @@ class CreateReview extends Component {
     this.setState({location: event.target.value});
   }
 
+  changeType = (event) => {
+    this.setState({type: event.target.value});
+  }
+
   render() {
     return (
       <div className="review-form">  
-      <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places
-        &key=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&callback=initMap">
-      </script>     
         <input id="autocomplete" placeholder="Location" onChange={this.updateQuery} defaultValue={this.state.location} />
         <div className="location-type">
           Type
-          <select name="type">
-            <option value="food">Grocery Store or Restaurant</option>
+          <select name="type" defaultValue={this.state.type} onChange={this.changeType}>
+            <option value="grocery">Grocery Store</option>
+            <option value="restaurant">Restaurant</option>
             <option value="shop">Store or Shop</option>
             <option value="public">Public spaces</option>
           </select>

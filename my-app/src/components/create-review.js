@@ -58,29 +58,31 @@ class CreateReview extends Component {
   submitReview = (event) => {
     let submit = true;
     if (this.state.location === '') {
-      this.createErrorNotif('Submission failed', 'Please choose a location to review.');
+      this.createNotif('Submission failed', 'Please choose a location to review.', 'warning');
       submit = false;
     }
     if (this.state.cleanliness === 0 || this.state.distancing === 0 || this.state.service === 0) {
-      this.createErrorNotif('Submission failed', 'Please provide ratings for all categories.');
+      this.createNotif('Submission failed', 'Please provide ratings for all categories.', 'warning');
       submit = false;
     }
     if (submit) {
       // send info to the database
+      this.createNotif("Submission succeeded!", "Your review has been submitted", 'success');
     }
   }
 
-  createErrorNotif = (title, message) => {
+  createNotif = (title, message, type) => {
     store.addNotification({
       title: title,
       message: message,
-      type: 'warning',
+      type: type,
       container:'top-right',
       animationIn: ["animated", "fadeIn"],
       animationOut: ["animated", "fadeOut"], 
       dismiss: { duration: 4000 }
     });
   }
+
 
   updateQuery = (event) => {
     this.setState({location: event.target.value});

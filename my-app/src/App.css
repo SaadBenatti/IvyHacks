@@ -1,3 +1,7 @@
+.App {
+  text-align: center;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
@@ -91,7 +95,6 @@ button {
   border-radius:8px;
 }
 
-<<<<<<< HEAD
 .category {
   margin: 1%;
 }
@@ -110,17 +113,5 @@ button {
   .navbar a {
     float: none;
     width: 100%;
-  }
-} */
-
-@keyframes App-logo-spin {
-=======
-/* @keyframes App-logo-spin {
->>>>>>> 70637639c5f2845442d0eab7270d64f92236b8ea
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 } */

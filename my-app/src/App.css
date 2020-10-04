@@ -91,6 +91,7 @@ button {
   border-radius:8px;
 }
 
+<<<<<<< HEAD
 .category {
   margin: 1%;
 }
@@ -113,10 +114,13 @@ button {
 } */
 
 @keyframes App-logo-spin {
+=======
+/* @keyframes App-logo-spin {
+>>>>>>> 70637639c5f2845442d0eab7270d64f92236b8ea
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-}
+} */

@@ -12,35 +12,35 @@ import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 import CreateReview from './components/create-review'
 import About from './About'
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import MapView from './components/map-view';
 
 
 
 var firebase = require("firebase/app");
 
-  // Add the Firebase products that you want to use
-  require("firebase/auth");
-  require("firebase/firestore");
+// Add the Firebase products that you want to use
+require("firebase/auth");
+require("firebase/firestore");
 
-  var firebaseConfig = {
-      apiKey: "AIzaSyCBTHB21J-4g4-GD86mShx5Sd8JztJiwuQ",
-      authDomain: "ivyhacks-ebbc6.firebaseapp.com",
-      databaseURL: "https://ivyhacks-ebbc6.firebaseio.com",
-      projectId: "ivyhacks-ebbc6",
-      storageBucket: "ivyhacks-ebbc6.appspot.com",
-      messagingSenderId: "793780521339",
-      appId: "1:793780521339:web:80799d16e5163782b015de",
-      measurementId: "G-PVSJQD49N5"
-  };
-  
-  if (firebase.apps.length === 0) {
-    firebase.initializeApp({});
-  }
-  else {
-    // Initialize Firebase
+var firebaseConfig = {
+  apiKey: "AIzaSyCBTHB21J-4g4-GD86mShx5Sd8JztJiwuQ",
+  authDomain: "ivyhacks-ebbc6.firebaseapp.com",
+  databaseURL: "https://ivyhacks-ebbc6.firebaseio.com",
+  projectId: "ivyhacks-ebbc6",
+  storageBucket: "ivyhacks-ebbc6.appspot.com",
+  messagingSenderId: "793780521339",
+  appId: "1:793780521339:web:80799d16e5163782b015de",
+  measurementId: "G-PVSJQD49N5"
+};
+
+if (firebase.apps.length === 0) {
+  firebase.initializeApp({});
+}
+else {
+  // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  }
+}
 
 
 
@@ -90,27 +90,24 @@ function App() {
                         </Grid>
 
                         <Grid item xs={6}>
-
-                          {/* </Route> 
-                          <Route path="/components/create-review" exact>
-                          <div> FILL </div>
-                          </Route>  */}
-
-                          {/* GROCERIES */}
-                          <IconButton>
-                            <Card className={classes.root} elevation={0}>
-                              <CardContent>
-                                <Groceries />
-                                <br></br>
-                                <h4>
-                                  Groceries
+                            <Link to= "/components/map-view">
+                              {/* GROCERIES */}
+                              <IconButton>
+                                <Card className={classes.root} elevation={0}>
+                                  <CardContent>
+                                    <Groceries />
+                                    <br></br>
+                                    <h4>
+                                      Groceries
                                 </h4>
-                              </CardContent>
-                            </Card>
-                          </IconButton>
+                                  </CardContent>
+                                </Card>
+                              </IconButton>
+                              </Link>
                         </Grid>
 
                         <Grid item xs={6}>
+                        <Link to= "/components/map-view">
                           {/* DEPARTMENT STOREs */}
                           <IconButton>
                             <Card className={classes.root} elevation={0}>
@@ -123,9 +120,11 @@ function App() {
                               </CardContent>
                             </Card>
                           </IconButton>
+                          </Link>
                         </Grid>
 
                         <Grid item xs={6}>
+                        <Link to= "/components/map-view">
                           {/* RESTAURANTS */}
                           <IconButton>
                             <Card className={classes.root} elevation={0}>
@@ -138,9 +137,11 @@ function App() {
                               </CardContent>
                             </Card>
                           </IconButton>
+                          </Link>
                         </Grid>
 
                         <Grid item xs={6}>
+                        <Link to= "/components/map-view">
                           {/* PUBLIC SPACES */}
                           <IconButton>
                             <Card className={classes.root} elevation={0}>
@@ -153,6 +154,7 @@ function App() {
                               </CardContent>
                             </Card>
                           </IconButton>
+                          </Link>
                         </Grid>
 
                       </Grid>
@@ -167,11 +169,17 @@ function App() {
                     <About />
                   </div>
                 </Route>
-                
+
                 {/* add review btn on-click reroute to create-review*/}
                 <Route path="/components/create-review" exact>
                   <div>
                     <CreateReview />
+                  </div>
+                </Route>
+
+                <Route path="/components/map-view" exact>
+                  <div>
+                    <MapView />
                   </div>
                 </Route>
 

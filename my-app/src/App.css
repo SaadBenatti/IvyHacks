@@ -37,17 +37,22 @@ option{
 /* Create two unequal columns that sits next to each other */
 /* Sidebar/left column */
 .side {
-  max-width: 40%;
+  max-width: 38%;
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+/* Map Column*/
+#map {   
+  width: 55%;
+  margin: 10px 3%;
+  height: 400px;
   background-color: white;
   padding: 20px;
 }
 
-/* Map Column*/
-.map {   
-  max-width: 60%;
-  background-color: white;
-  padding: 20px;
-}
 
 .lookingfor {
   display: inline-flex;

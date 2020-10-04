@@ -4,6 +4,7 @@ import { ReactComponent as Grocery } from '../svg/groceries.svg';
 import { ReactComponent as Department } from '../svg/department-stores.svg';
 import { ReactComponent as Restaurants } from '../svg/restaurants.svg';
 import { ReactComponent as Spaces } from '../svg/public-spaces.svg'
+import { loadJS, removeGoogleMapScript } from '../maps-functions';
 
 class MapView extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class MapView extends Component {
   }
 
   componentDidMount = () => {
+    removeGoogleMapScript();
     window.initMap = this.initMap;
     loadJS("https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&callback=initMap");
   }
@@ -38,7 +40,7 @@ class MapView extends Component {
         this.autocomplete.setBounds(circle.getBounds());
         this.autocomplete.setOptions({strictBounds: true});
         this.map.setCenter(geolocation);
-        this.map.setZoom(5);
+        this.map.setZoom(15);
       });
     }
   }
@@ -48,14 +50,18 @@ class MapView extends Component {
     this.setState({
       location: locationObject.description,
       placeId: locationObject.place_id,
+      area: locationObject,
     });
   }
 
-  changeZip = (event) => {
+  changeLocation = (event) => {
     this.setState({area: event.target.value});
   }
 
   search = () => {
+    console.log(this.state.area);
+    let latlng = this.state.area.geometry.location;
+    this.map.setCenter(latlng);
     // take all the information, query the firebase, save results to state
     // if there are no reviews, return the top results from the google maps API
     // OR "looks like there are no reviewed locations for your query"
@@ -98,7 +104,7 @@ class MapView extends Component {
             </select>
 
             <div>near</div>
-          <input onChange={this.changeZip} placeholder="location" id="autocomplete" defaultValue={this.state.area}></input>
+          <input onChange={this.changeLocation} placeholder="location" id="autocomplete" defaultValue={this.state.area}></input>
 
           <button type="button" onClick={this.search}>Search</button>
         </div>
@@ -113,21 +119,12 @@ class MapView extends Component {
                 this.createResult(result.name, result.rating, index)
               ))}
           </div>
-          <div id="map"> </div>
         </div>
+        <div id="map" />
       </div>
     </div>
     );
   }
-}
-
-// https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
-function loadJS(src) {
-  var ref = window.document.getElementsByTagName("script")[0];
-  var script = window.document.createElement("script");
-  script.src = src;
-  script.async = true;
-  ref.parentNode.insertBefore(script, ref);
 }
 
 export default MapView;

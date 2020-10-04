@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import StarRatingComponent from 'react-star-rating-component';
-import Grocery from '../groceries.svg';
-import PublicSpace from '../public_spaces.svg';
-import DepartmentStores from '../department_stores.svg';
-import Restaurant from '../restaurant.svg';
+import { ReactComponent as Grocery } from '../svg/groceries.svg';
+import { ReactComponent as Department } from '../svg/department-stores.svg';
+import { ReactComponent as Restaurants } from '../svg/restaurants.svg';
+import { ReactComponent as Spaces } from '../svg/public-spaces.svg'
 
 class MapView extends Component {
   constructor(props) {
@@ -11,13 +11,48 @@ class MapView extends Component {
     this.state = {
       location: '',
       attribute: '',
-      zipCode: '',
+      area: '',
       results: [],
     }
   }
 
+  componentDidMount = () => {
+    window.initMap = this.initMap;
+    loadJS("https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&callback=initMap");
+  }
+
+// add listener for changes & get user location
+  initMap = () => {
+    this.autocomplete = new window.google.maps.places.Autocomplete(
+      document.getElementById('autocomplete'));
+    this.map = new window.google.maps.Map(document.getElementById('map'));
+    this.autocomplete.addListener('place_changed', this.handlePlaceSelect);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        var geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        var circle = new window.google.maps.Circle(
+          {center: geolocation, radius: position.coords.accuracy});
+        this.autocomplete.setBounds(circle.getBounds());
+        this.autocomplete.setOptions({strictBounds: true});
+        this.map.setCenter(geolocation);
+        this.map.setZoom(5);
+      });
+    }
+  }
+
+  handlePlaceSelect = () => {
+    const locationObject = this.autocomplete.getPlace();
+    this.setState({
+      location: locationObject.description,
+      placeId: locationObject.place_id,
+    });
+  }
+
   changeZip = (event) => {
-    this.setState({zipCode: event.target.value});
+    this.setState({area: event.target.value});
   }
 
   search = () => {
@@ -45,9 +80,6 @@ class MapView extends Component {
   render = () => {
     return (
       <div className="searchPage">
-        <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places
-        &key=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&callback=initMap">
-      </script>     
         <div className="lookingfor"> 
           <div> I am looking for </div> 
             <select name = "location" id = "location">
@@ -66,7 +98,7 @@ class MapView extends Component {
             </select>
 
             <div>near</div>
-          <input type="text" onChange={this.changeZip} placeholder="location" defaultValue={this.state.zipCode}></input>
+          <input onChange={this.changeZip} placeholder="location" id="autocomplete" defaultValue={this.state.area}></input>
 
           <button type="button" onClick={this.search}>Search</button>
         </div>
@@ -74,19 +106,28 @@ class MapView extends Component {
           <div className="side"> 
             <div className="search-header">
               <h2>Top Results</h2>
-              <img src={Grocery} alt="Grocery decoration"/>
+              <Grocery />
             </div>
             <div className="search-results">
               {this.state.results.map((result, index) => (
                 this.createResult(result.name, result.rating, index)
               ))}
           </div>
-          <div className="map"> </div>
+          <div id="map"> </div>
         </div>
       </div>
     </div>
     );
   }
+}
+
+// https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
+function loadJS(src) {
+  var ref = window.document.getElementsByTagName("script")[0];
+  var script = window.document.createElement("script");
+  script.src = src;
+  script.async = true;
+  ref.parentNode.insertBefore(script, ref);
 }
 
 export default MapView;

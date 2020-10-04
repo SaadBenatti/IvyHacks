@@ -15,6 +15,35 @@ import './App.css';
 import CreateReview from './components/create-review'
 
 
+
+var firebase = require("firebase/app");
+
+  // Add the Firebase products that you want to use
+  require("firebase/auth");
+  require("firebase/firestore");
+
+  var firebaseConfig = {
+      apiKey: "AIzaSyCBTHB21J-4g4-GD86mShx5Sd8JztJiwuQ",
+      authDomain: "ivyhacks-ebbc6.firebaseapp.com",
+      databaseURL: "https://ivyhacks-ebbc6.firebaseio.com",
+      projectId: "ivyhacks-ebbc6",
+      storageBucket: "ivyhacks-ebbc6.appspot.com",
+      messagingSenderId: "793780521339",
+      appId: "1:793780521339:web:80799d16e5163782b015de",
+      measurementId: "G-PVSJQD49N5"
+  };
+  
+  if (firebase.apps.length === 0) {
+    firebase.initializeApp({});
+  }
+  else {
+
+    // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  }
+
+
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -24,6 +53,10 @@ const useStyles = makeStyles({
 
 function App() {
   const classes = useStyles();
+
+  
+  
+  
 
   return (
     <Grid container direction="column" >

@@ -157,7 +157,7 @@ class CreateReview extends Component {
         </div>
         <br></br><br></br>
 
-        <textarea id="review" name="Location review" rows="4" cols="50" placeholder="Leave a review!"/><br></br>
+        <textarea id="review" name="Location review" rows="4" cols="50" placeholder="Additional comments here!"/><br></br>
         <button type="button" onClick={this.submitReview}>Submit Review</button>
       </div>
     )

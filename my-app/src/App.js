@@ -1,19 +1,15 @@
 import React from 'react';
 import ReactNotifications from 'react-notifications-component';
-import { Grid } from "@material-ui/core";
+import { Grid, CardContent, IconButton, Card } from "@material-ui/core";
 import Header from './Header';
 import { ReactComponent as Groceries } from './svg/groceries.svg';
 import { ReactComponent as Department } from './svg/department-stores.svg';
 import { ReactComponent as Restaurants } from './svg/restaurants.svg';
 import { ReactComponent as Spaces } from './svg/public-spaces.svg';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import './App.css';
-// import CreateReview from './components/create-review';
 import MapView from './components/map-view';
 import CreateReview from './components/create-review';
 
@@ -32,12 +28,12 @@ function App() {
     <Grid container direction="column" >
       <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places
         &key=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&callback=initMap">
-      </script>     
+      </script>
       <ReactNotifications />
       <Grid item>
         <Header />
       </Grid>
-
+      <MapView />
       <Grid item container>
         <Grid xs={false} s={2} />
         <Grid xs={12} s={8}>
@@ -107,7 +103,6 @@ function App() {
         </Grid>
         <Grid xs={false} s={2} /> 
       </Grid>
-      
     </Grid>
   );
 

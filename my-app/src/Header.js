@@ -8,13 +8,19 @@ import { ReactComponent as Logo } from './svg/logo.svg';
 import { ReactComponent as SearchIcon } from './svg/search.svg';
 import { ReactComponent as ReviewBtn } from './svg/addrev.svg';
 import { IconButton } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import {
+  geocodeByAddress,
+  geocodeByPlaceId,
+  getLatLng,
+} from 'react-places-autocomplete';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   customizeToolbar: {
-    minHeight: 125,
+    minHeight: 100,
   },
   canaryLogo: {
     marginRight: theme.spacing(2),
@@ -29,16 +35,16 @@ const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
     color: 'black',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    borderRadius: 25,
+    backgroundColor: fade(theme.palette.common.white, 0.5),
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: fade(theme.palette.common.white, 0.5),
     },
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(1),
-      width: 'auto',
+      width: '15%',
     },
   },
   searchIcon: {
@@ -75,39 +81,53 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SearchAppBar() {
+export default function Header() {
   const classes = useStyles();
+  const [address, setAddress] = React.useState("");
+  const handleSelect = async value => {};
 
   // for conditional background change later
   const currCategoryBackground = 'groceries';
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" elevation={0}
-        style={{ backgroundColor: '#FFDDC8' }}>
+      <AppBar position="sticky" elevation={0}
+        style={{ backgroundColor: '#F0D8C9' }}>
         <Toolbar className={classes.customizeToolbar}>
             <IconButton className = {classes.canaryLogo} >
+            <Link to="/About">
                 <Logo />
+            </Link>
             </IconButton>
+            
           <Typography className={classes.title} variant="h6" noWrap>
             {/* About */}
           </Typography>
+
           <div className={classes.search}>
             <div className={classes.searchIcon} >
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search location…"
+              placeholder="Location…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              style={{
+                fontFamily: '"Poppins", sans-serif'
+              }}
             />
           </div>
-          <IconButton className={classes.review}>
+
+          <div className={classes.review}>
+          {/* <Button component={Link} to="/components/create-review"> */}
+          <Link to="/components/create-review">
             <ReviewBtn />
-          </IconButton>
+          </Link>
+          {/* </Button> */}
+          </div>
         </Toolbar>
       </AppBar>
     </div>

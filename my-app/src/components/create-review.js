@@ -90,19 +90,29 @@ class CreateReview extends Component {
 
   render() {
     return (
-      <div className="review-form">  
+      <div className="review-form" style={{
+        fontFamily: '"Poppins", sans-serif',
+        position: 'absolute',
+        left: '50%', top: '50%',
+        transform: 'translate(-50%, -50%)',
+      }}>  
+      <h3>Where did you go?</h3>  
         <input id="autocomplete" placeholder="Location" onChange={this.updateQuery} defaultValue={this.state.location} />
+        <br></br><br></br>
+
         <div className="location-type">
-          Type
+          Type: <br></br>
           <select name="type" defaultValue={this.state.type} onChange={this.changeType}>
             <option value="grocery">Grocery Store</option>
+            <option value="shop">Shopping</option>
             <option value="restaurant">Restaurant</option>
-            <option value="shop">Store or Shop</option>
             <option value="public">Public spaces</option>
           </select>
         </div>
+        <br></br>
+
         <div className="category">
-          Cleanliness
+          <h3>Cleanliness</h3>
           <div className="category-description">
             How clean was this place? Are there good procedures to clean often touched surfaces?
           </div>
@@ -116,7 +126,7 @@ class CreateReview extends Component {
         </div>
 
         <div className="category">
-          Social Distancing
+        <h3>Social Distancing</h3>
           <div className="category-description">
             Are people following restrictions (wearing masks, social distancing)? Are occupancy limits being respected?
           </div>
@@ -130,7 +140,7 @@ class CreateReview extends Component {
         </div>
 
         <div className="category">
-          Customer Service
+        <h3>Customer Service</h3>
           <div className="category-description">
             Do the staff enforce restrictions? Did they make you feel safe?
           </div>
@@ -142,8 +152,9 @@ class CreateReview extends Component {
               onStarClick={(val, prev, name) => this.setState({service: val})} />
           </div>
         </div>
+        <br></br><br></br>
 
-        <textarea id="review" name="Location review" rows="4" cols="50" placeholder="Leave a review!"/>
+        <textarea id="review" name="Location review" rows="4" cols="50" placeholder="Leave a review!"/><br></br>
         <button type="button" onClick={this.submitReview}>Submit Review</button>
       </div>
     )

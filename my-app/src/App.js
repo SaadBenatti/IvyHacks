@@ -63,10 +63,6 @@ function App() {
         <BrowserRouter>
           <Grid container>
 
-            <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places
-              &key=AIzaSyDIA9biuFpMecc9LIlpEPryqgOhzsIM-jY&callback=initMap">
-            </script>  
-
             <Grid item xs={12}>
               <Header />
             </Grid>

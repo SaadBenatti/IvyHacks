@@ -101,6 +101,11 @@ option{
   font-size: 15px;
   padding: 8px 4px;
   border-radius:8px;
+  background-color: #FFE177
+}
+
+.review-form button:hover {
+  background-color: #f0c93e
 }
 
 .category {

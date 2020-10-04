@@ -93,8 +93,9 @@ class CreateReview extends Component {
         <div className="location-type">
           Type
           <select name="type">
-            <option value="food">Grocery Store or Restaurant</option>
-            <option value="shop">Store or Shop</option>
+            <option value="grocery">Grocery store</option>
+            <option value="shop">Shopping</option>
+            <option value="food">Restaurant</option>
             <option value="public">Public spaces</option>
           </select>
         </div>

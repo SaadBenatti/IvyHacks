@@ -85,8 +85,8 @@ export default function Header() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" elevation={0}
-        style={{ backgroundColor: '#FFDDC8' }}>
+      <AppBar position="sticky" elevation={0}
+        style={{ backgroundColor: '#F0D8C9' }}>
         <Toolbar className={classes.customizeToolbar}>
             <IconButton className = {classes.canaryLogo} >
                 <Logo />

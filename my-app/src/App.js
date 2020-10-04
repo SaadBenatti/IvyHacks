@@ -28,103 +28,123 @@ function App() {
 
   return (
     <Grid container direction="column" >
-      
-        <div>
+
+      <div>
         <BrowserRouter>
-        <Header />
-        <Switch>
-        <Route path="/" exact>
-        <div>
-        <Grid item container>
-        <Grid xs={false} s={2} />
-        <Grid xs={12} s={8}>
-        <div style={{
-              position: 'absolute', left: '50%', top: '60%',
-              transform: 'translate(-50%, -50%)',
-              textAlign: 'center'
-          }}>
-          <h1>
-            Welcome, <br></br>
-            where are you headed today?
-          </h1><br></br>
+          <Grid container>
 
-          {/* </Route> 
-        <Route path="/components/create-review" exact>
-         <div>
-           <CreateReview />
-         </div>
-        </Route>  */}
+            <Grid item xs={12}>
+              <Header />
+            </Grid>
 
-          {/* GROCERIES */}
-          <IconButton>
-          <Card className={classes.root} elevation={0}>
-          <CardContent>
-            <Groceries /> 
-            <br></br>
-            <h3>
-              Groceries
-            </h3>
-          </CardContent>
-          </Card>
-          </IconButton>
+            <Grid item xs={12}>
+              <Switch>
+                <Route path="/" exact>
+                  <div>
 
-          {/* DEPARTMENT STOREs */}
-          <IconButton>
-          <Card className={classes.root} elevation={0}>
-          <CardContent>
-            <Department /> 
-            <br></br>
-            <h3>
-              Department Stores
-            </h3>
-          </CardContent>
-          </Card>
-          </IconButton>
+                    <div style={{
+                      position: 'absolute',
+                      left: '50%', top: '60%',
+                      transform: 'translate(-50%, -50%)',
+                      textAlign: 'center'
+                    }}>
 
-          {/* RESTAURANTS */}
-          <IconButton>
-          <Card className={classes.root} elevation={0}>
-          <CardContent>
-            <Restaurants /> 
-            <br></br>
-            <h3>
-              Restaurants
-            </h3>
-          </CardContent>
-          </Card>
-          </IconButton>
+                      <Grid container>
 
-          {/* PUBLIC SPACES */}
-          <IconButton>
-          <Card className={classes.root} elevation={0}>
-          <CardContent>
-            <Spaces /> 
-            <br></br>
-            <h3>
-              Public Spaces
-            </h3>
-          </CardContent>
-          </Card>
-          </IconButton>
+                        <Grid item xs={12}>
+                          <h1>
+                            Welcome, <br></br>
+                            where are you headed today?
+                          </h1>
+                          <br></br>
+                        </Grid>
 
-          </div>
-        </Grid>
-        <Grid xs={false} s={2} /> 
-      </Grid>
-        </div>
-        </Route> 
-        <Route path="/components/create-review" exact>
-         <div>
-           <CreateReview />
-         </div>
-        </Route> 
-        </Switch>
+
+                        <Grid item xs={6}>
+
+                          {/* </Route> 
+                          <Route path="/components/create-review" exact>
+                          <div> FILL </div>
+                          </Route>  */}
+
+                          {/* GROCERIES */}
+                          <IconButton>
+                            <Card className={classes.root} elevation={0}>
+                              <CardContent>
+                                <Groceries />
+                                <br></br>
+                                <h3>
+                                  Groceries
+                                </h3>
+                              </CardContent>
+                            </Card>
+                          </IconButton>
+                        </Grid>
+
+                        <Grid item xs={6}>
+                          {/* DEPARTMENT STOREs */}
+                          <IconButton>
+                            <Card className={classes.root} elevation={0}>
+                              <CardContent>
+                                <Department />
+                                <br></br>
+                                <h3>
+                                  Department Stores
+                                </h3>
+                              </CardContent>
+                            </Card>
+                          </IconButton>
+                        </Grid>
+
+                        <Grid item xs={6}>
+                          {/* RESTAURANTS */}
+                          <IconButton>
+                            <Card className={classes.root} elevation={0}>
+                              <CardContent>
+                                <Restaurants />
+                                <br></br>
+                                <h3>
+                                  Restaurants
+                                </h3>
+                              </CardContent>
+                            </Card>
+                          </IconButton>
+                        </Grid>
+
+                        <Grid item xs={6}>
+                          {/* PUBLIC SPACES */}
+                          <IconButton>
+                            <Card className={classes.root} elevation={0}>
+                              <CardContent>
+                                <Spaces />
+                                <br></br>
+                                <h3>
+                                  Public Spaces
+                                </h3>
+                              </CardContent>
+                            </Card>
+                          </IconButton>
+                        </Grid>
+
+                      </Grid>
+                    </div>
+
+                  </div>
+                </Route>
+                <Route path="/components/create-review" exact>
+                  <div>
+                    <CreateReview />
+                  </div>
+                </Route>
+              </Switch>
+            </Grid>
+          </Grid>
         </BrowserRouter>
-        </div>
-     
+      </div>
 
-      
-      
+
+
+
     </Grid>
   );
 
